@@ -2,6 +2,9 @@ from django import forms
 from django.db import models
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
+
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
@@ -23,6 +26,13 @@ class BlogIndexPage(Page):
         FieldPanel('intro')
     ]
 
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'BlogPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+
 class BlogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
@@ -35,6 +45,8 @@ class BlogPage(Page):
                 return gallery_item.image
             else:
                 return None
+            
+    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -45,6 +57,7 @@ class BlogPage(Page):
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('authors', widget=forms.CheckboxSelectMultiple),
+            FieldPanel('tags'),
             ], heading="Blog information"),
         FieldPanel('intro'),
         FieldPanel('body'),
