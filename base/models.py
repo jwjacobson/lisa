@@ -17,9 +17,8 @@ class NavigationSettings(BaseGenericSetting):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("twitter_url"),
-                FieldPanel("github_url"),
-                FieldPanel("mastodon_url"),
+                FieldPanel("youtube_url"),
+                FieldPanel("facebook_url"),
             ],
             "Social settings",
         )
