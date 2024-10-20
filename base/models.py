@@ -10,9 +10,8 @@ from wagtail.contrib.settings.models import (
 
 @register_setting
 class NavigationSettings(BaseGenericSetting):
-    twitter_url = models.URLField(verbose_name="Twitter URL", blank=True)
-    github_url = models.URLField(verbose_name="GitHub URL", blank=True)
-    mastodon_url = models.URLField(verbose_name="Mastodon URL", blank=True)
+    youtube_url = models.URLField(verbose_name="Youtube URL", blank=True)
+    facebook_url = models.URLField(verbose_name="Facebook URL", blank=True)
 
     panels = [
         MultiFieldPanel(
