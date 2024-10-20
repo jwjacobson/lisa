@@ -1,6 +1,6 @@
-<footer></footer>
-    <p>Built with Wagtail</p>
+{% load navigation_tags %}
 
+<footer>
     {% with youtube_url=settings.base.NavigationSettings.youtube_url facebook_url=settings.base.NavigationSettings.facebook_url %}
         {% if youtube_url or facebook_url %}
             <p>
@@ -14,4 +14,5 @@
             </p>
         {% endif %}
     {% endwith %}
+    {% get_footer_text %}
 </footer>
