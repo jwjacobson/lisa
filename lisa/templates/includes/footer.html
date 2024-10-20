@@ -1,0 +1,17 @@
+<footer></footer>
+    <p>Built with Wagtail</p>
+
+    {% with youtube_url=settings.base.NavigationSettings.youtube_url facebook_url=settings.base.NavigationSettings.facebook_url %}
+        {% if youtube_url or facebook_url %}
+            <p>
+                Follow me on:
+                {% if youtube_url %}
+                    <a href="{{ youtube_url }}">GitHub</a>
+                {% endif %}
+                {% if facebook_url %}
+                    <a href="{{ facebook_url }}">Twitter</a>
+                {% endif %}
+            </p>
+        {% endif %}
+    {% endwith %}
+</footer>
